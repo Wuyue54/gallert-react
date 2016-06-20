@@ -21,8 +21,9 @@ imageData = (function generateImageURL(imageDataArray){
 class AppComponent extends React.Component {
   render() {
     return (
-    	<section className = "state">
+    	<section className = "stage">
     		<section className = "imgSec">
+                <p>hello</p>
     		</section>
     		<nav className = "controller-nav">
     		</nav>
