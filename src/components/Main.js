@@ -2,6 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/App.scss');
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // let yeomanImage = require('../images/yeoman.png');
 var imageData = require('../data/imageData.json');
@@ -56,7 +57,7 @@ class AppComponent extends React.Component {
         x: [0,0],
         topY: [0,0]
     }
-  }  
+  }
 
   reArrange = function(centerIndex){
     var imagesArrangeArr = this.state.imagesArrangeArr,
@@ -140,18 +141,19 @@ class AppComponent extends React.Component {
   // },
 
   componentDidMount(){
-    var stageDOM = React.findDOMNode(this.refs.stage),
+    var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
         stageWidth = stageDOM.scrollWidth,
-        stageHeight = stageDO.scrollHeight,
+        stageHeight = stageDOM.scrollHeight,
         halfStageW = Math.ceil(stageWidth/2),
         halfStageH = Math.ceil(stageHeight/2);
 
-    var imgFigureDOM = React.findDOMNode(this.refs.imgFigure0),
+    var imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
         imgW = imgFigureDOM.scrollWidth,
         imgH = imgFigureDOM.scrollHeight,
         halfImgW = Math.ceil(imgW/2),
         halfImgH = Math.ceil(imgH/2);
 
+    console.log(this.Constant);
     this.Constant.centerPos = {
         left: halfStageW - halfImgW,
         top: halfStageH - halfImgH
@@ -172,7 +174,7 @@ class AppComponent extends React.Component {
     this.reArrange(0);
 
   }
-
+  
   render() {    
     var controllerUnits = [],
         imgFigures = [];
