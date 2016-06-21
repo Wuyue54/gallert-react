@@ -42,7 +42,7 @@ var ImgFigure = React.createClass({
     
 })
 
-class AppComponent extends React.Component {
+var AppComponent = React.createClass({
   Constant:{
     centerPos: {
         left:0,
@@ -57,14 +57,14 @@ class AppComponent extends React.Component {
         x: [0,0],
         topY: [0,0]
     }
-  }
+  },
 
-  reArrange = function(centerIndex){
+  reArrange : function(centerIndex){
     var imagesArrangeArr = this.state.imagesArrangeArr,
         Constant = this.Constant,
         centerPos = Constant.centerPos,
         hPosRange = Constant.hPosRange,
-        vPosRange = Constant.vPorRange,
+        vPosRange = Constant.vPosRange,
         hPosRangeLeftSecX = hPosRange.leftSecX,
         hPosRangeRightSecX = hPosRange.rightSecX,
         hPosRangeY = hPosRange.y,
@@ -72,15 +72,15 @@ class AppComponent extends React.Component {
         vPosRangeTopY = vPosRange.topY,
 
         imagesArrangeTopArr = [],
-        topImageNum = Math.ceil(Math.random() * 2);
-        topImageSpliceIndex = 0;
+        topImageNum = Math.ceil(Math.random() * 2),
+        topImageSpliceIndex = 0,
 
-    imagesArraneCenter = imagesArrangeArr.splice(centerIndex,1);
+        imagesArraneCenter = imagesArrangeArr.splice(centerIndex,1);
+        console.log(imagesArraneCenter);
+        imagesArraneCenter[0].pos = centerPos;
 
-    imagesArraneCenter[0].pos = centerPos;
-
-    topImageSpliceIndex = Math.ceil( Math.random() * (imagesArrangeArr.length - topImageNum));
-    imagesArrangeTopArr = imagesArrangeArr.splice(topImageSpliceIndex, topImageNum);
+        topImageSpliceIndex = Math.ceil( Math.random() * (imagesArrangeArr.length - topImageNum)),
+        imagesArrangeTopArr = imagesArrangeArr.splice(topImageSpliceIndex, topImageNum);
 
     imagesArrangeTopArr.forEach(function(value, index){
         imagesArrangeTopArr[index].pos = {
@@ -113,22 +113,10 @@ class AppComponent extends React.Component {
         imagesArrangeArr: imagesArrangeArr
     })
 
-  }
-  constructor(props) {
-    super(props);
-    this.state = {
-        imagesArrangeArr:[
-            {
-                pos:{
-                    left: '0',
-                    top: '0'
-                }
-            }
-        ]
-    };
-  }
-  // getInitialState: function(){
-  //   return {
+  },
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
   //       imagesArrangeArr:[
   //           {
   //               pos:{
@@ -137,10 +125,22 @@ class AppComponent extends React.Component {
   //               }
   //           }
   //       ]
-  //   }
-  // },
+  //   };
+  // }
+  getInitialState: function(){
+    return {
+        imagesArrangeArr:[
+            {
+                pos:{
+                    left: '0',
+                    top: '0'
+                }
+            }
+        ]
+    }
+  },
 
-  componentDidMount(){
+  componentDidMount: function(){
     var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
         stageWidth = stageDOM.scrollWidth,
         stageHeight = stageDOM.scrollHeight,
@@ -173,9 +173,9 @@ class AppComponent extends React.Component {
 
     this.reArrange(0);
 
-  }
+  },
   
-  render() {    
+  render: function() {    
     var controllerUnits = [],
         imgFigures = [];
    
@@ -202,7 +202,7 @@ class AppComponent extends React.Component {
     	</section>
     );
   }
-}
+})
 
 AppComponent.defaultProps = {
 };
