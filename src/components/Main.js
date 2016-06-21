@@ -19,7 +19,7 @@ imageData = (function generateImageURL(imageDataArray){
 
 // imageData = generateImageURL(imageData);
 function getRangeRandom(low, high){
-    return Math.ceil( Math.random(high - low ) + low);
+    return Math.ceil( Math.random() * (high - low ) + low);
 }
 
 var ImgFigure = React.createClass({
@@ -76,15 +76,17 @@ var AppComponent = React.createClass({
         topImageSpliceIndex = 0,
 
         imagesArraneCenter = imagesArrangeArr.splice(centerIndex,1);
-        console.log(imagesArraneCenter);
+        // console.log(imagesArraneCenter);
         imagesArraneCenter[0].pos = centerPos;
 
-        topImageSpliceIndex = Math.ceil( Math.random() * (imagesArrangeArr.length - topImageNum)),
-        imagesArrangeTopArr = imagesArrangeArr.splice(topImageSpliceIndex, topImageNum);
+        topImageSpliceIndex = Math.ceil( Math.random() * (imagesArrangeArr.length - topImageNum));
+    imagesArrangeTopArr = imagesArrangeArr.splice(topImageSpliceIndex, topImageNum);
 
     imagesArrangeTopArr.forEach(function(value, index){
+        console.log(vPosRangeTopY);
+        console.log(getRangeRandom(vPosRangeTopY[1], vPosRangeTopY[0]));
         imagesArrangeTopArr[index].pos = {
-            top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+            top: getRangeRandom(vPosRangeTopY[1], vPosRangeTopY[0]),
             left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
         }
     });
@@ -114,19 +116,7 @@ var AppComponent = React.createClass({
     })
 
   },
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //       imagesArrangeArr:[
-  //           {
-  //               pos:{
-  //                   left: '0',
-  //                   top: '0'
-  //               }
-  //           }
-  //       ]
-  //   };
-  // }
+
   getInitialState: function(){
     return {
         imagesArrangeArr:[
@@ -159,17 +149,17 @@ var AppComponent = React.createClass({
         top: halfStageH - halfImgH
     };
 
-    this.Constant.hPosRange.leftSecX[0] = 0 -halfImgW;
+    this.Constant.hPosRange.leftSecX[0] = -halfImgW;
     this.Constant.hPosRange.leftSecX[1] = halfStageW -  halfImgW * 3;
     this.Constant.hPosRange.rightSecX[0] = halfStageW + halfImgW;
     this.Constant.hPosRange.rightSecX[1] = stageWidth -  halfImgW;
     this.Constant.hPosRange.y[0] = - halfImgH;
-    this.Constant.hPosRange.y[1] = stageHeight -  halfImgW;
+    this.Constant.hPosRange.y[1] = stageHeight -  halfImgH;
     
     this.Constant.vPosRange.x[0] = halfStageW - imgW;
     this.Constant.vPosRange.x[1] = halfStageW;
-    this.Constant.vPosRange.topY[0] = - halfImgH;
-    this.Constant.vPosRange.topY[1] = halfStageH -  halfImgH * 3;
+    this.Constant.vPosRange.topY[0] = -halfImgH;
+    this.Constant.vPosRange.topY[1] = halfStageH -  halfImgH * 3 ;
 
     this.reArrange(0);
 
