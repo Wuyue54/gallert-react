@@ -1,1 +1,1 @@
-# gallert-react
+# gallery-react
