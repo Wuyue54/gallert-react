@@ -26,7 +26,6 @@ function getRotateRandom(){
 }
 
 var ImgFigure = React.createClass({
-
     handleClick: function(e){
         if( this.props.arrange.isCenter){
             this.props.inverse();
@@ -46,8 +45,8 @@ var ImgFigure = React.createClass({
         }
 
         if(this.props.arrange.rotate){
-            (['MozTransform', 'msTransfromt', 'WebkitTransform', 'transform']).forEach(function(value){
-                styleObj[value] = 'rotate('+ this.props.arrange.rotate+'deg)';
+            (['-moz-', '-ms-', '-webkit-', '']).forEach(function(value){
+                styleObj['transform'] = 'rotate('+ this.props.arrange.rotate+'deg)';
             }.bind(this))
         }
 
@@ -74,35 +73,6 @@ var ImgFigure = React.createClass({
         )
     }
     
-})
-
-var ControllerUnit = React.createClass({
-   
-    handleClick: function (e) {
-        if (this.props.arrange.isCenter) {
-            this.props.inverse();
-        } else {
-            this.props.center();
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-    },
-
-    render: function(){
-        var controlelrUnitClassName = "controller-unit";
-        
-        if (this.props.arrange.isCenter) {
-            controlelrUnitClassName += " is-center";
-            if (this.props.arrange.isInverse) {
-                controlelrUnitClassName += " is-inverse";
-            }
-        }
-
-        return (
-            <span className={controlelrUnitClassName} onClick={this.handleClick}></span>
-        );
-    }
 })
 
 var AppComponent = React.createClass({
@@ -147,7 +117,7 @@ var AppComponent = React.createClass({
         vPosRangeTopY = vPosRange.topY,
 
         imagesArrangeTopArr = [],
-        topImageNum = Math.floor(Math.random() * 2),
+        topImageNum = Math.ceil(Math.random() * 2),
         topImageSpliceIndex = 0,
 
         imagesArraneCenter = imagesArrangeArr.splice(centerIndex,1);
@@ -276,12 +246,11 @@ var AppComponent = React.createClass({
                 isCenter: false
             }
         }
-        imgFigures.push(<ImgFigure key={index} data={value} ref = {'imgFigure'+index} 
+        imgFigures.push(<ImgFigure data={value} ref = {'imgFigure'+index} 
             arrange = {this.state.imagesArrangeArr[index]}
             inverse = {this.inverse(index)}
             center = {this.center(index)}/>
             );
-        controllerUnits.push(<ControllerUnit key={index} arrange={this.state.imagesArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
     }.bind(this));
 
     return (
