@@ -1,32 +1,67 @@
-'use strict';
-
+const webpack = require('webpack');
 const path = require('path');
-const args = require('minimist')(process.argv.slice(2));
 
-// List of allowed environments
-const allowedEnvs = ['dev', 'dist', 'test'];
+module.exports = {
+	devtool: 'eval-cheap-module-source-map',
+	entry:[
+		// 'webpack-dev-server/client?http://127.0.0.1:8080/',
+		// 'webpack/hot/only-dev-server',
+		'./src/index.js'
+	],
+	output:{
+		path: path.join(__dirname, 'public'),
+		filename: 'bundle.js',
+		publicPath: '/public/'
+	},
+	resolve:{
+		modulesDirectories:['node_modules','src'],
+		extensions:[ '', '.js', 'map', '.jsx']
+	},
+	module:{
 
-// Set the correct environment
-let env;
-if (args._.length > 0 && args._.indexOf('start') !== -1) {
-  env = 'test';
-} else if (args.env) {
-  env = args.env;
-} else {
-  env = 'dev';
-}
-process.env.REACT_WEBPACK_ENV = env;
-
-/**
- * Build the webpack configuration
- * @param  {String} wantedEnv The wanted environment
- * @return {Object} Webpack config
- */
-function buildConfig(wantedEnv) {
-  let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
-  let validEnv = isValid ? wantedEnv : 'dev';
-  let config = require(path.join(__dirname, 'cfg/' + validEnv));
-  return config;
-}
-
-module.exports = buildConfig(env);
+		loaders: [
+					{
+						test: /\.jsx?$/,
+								exclude: /(node_modules)/,
+								loaders: ['react-hot','babel']
+					},
+		      {
+		        test: /\.css$/,
+		        loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
+		      },
+		      {
+		        test: /\.sass/,
+		        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+		      },
+		      {
+		        test: /\.scss/,
+		        loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?outputStyle=expanded'
+		      },
+		      {
+		        test: /\.styl/,
+		        loader: 'style-loader!css-loader!stylus-loader'
+		      },
+		      {
+		        test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
+		        loader: 'url-loader?limit=8192?'
+		      },
+		      {
+		        test:/\.json/,
+		        loader: 'json-loader'
+		      },
+		      {
+		        test: /\.(mp4|ogg|svg)$/,
+		        loader: 'file-loader'
+		      }
+		    ]
+	},
+	plugins:[
+		// new webpack.HotModuleReplacementPlugin(),
+		// new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+		 'process.env': {
+			 'NODE_ENV': JSON.stringify('production')
+		 }
+ })
+	]
+};

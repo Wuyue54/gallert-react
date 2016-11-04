@@ -1,52 +1,17 @@
 [
 	{
-		"fileName": "01.jpg" ,
+		"fileName": "finish1.jpg" ,
 		"title": "none",
-		"description": "none"
+		"description": "Life is full of obstacles that make you stumble, \r this gonna hurt and you may cry."
 	},
 	{
-		"fileName": "02.jpg" ,
+		"fileName": "finish2.jpg" ,
 		"title": "none",
-		"description": "none"
+		"description": "Even though it hurts, you have to grip your hair, pick yourself up and dust yourself off."
 	},
 	{
-		"fileName": "03.jpg" ,
+		"fileName": "finish3.jpg" ,
 		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "04.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "05.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "06.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "07.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "08.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "09.jpg" ,
-		"title": "none",
-		"description": "none"
-	},
-	{
-		"fileName": "10.jpg" ,
-		"title": "none",
-		"description": "none"
+		"description": "Remember, you can always jump high."
 	}
 ]
